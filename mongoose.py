@@ -41,6 +41,20 @@ class Mongoose:
                 segment.setpos(self.segments[-1].pos())
             self.segments.append(segment)
 
+    def reset(self):
+        """
+        Sends the active mongoose to the graveyard.
+        Creates new mongoose at its initial configuration at the center of the screen.
+        """
+        graveyard = (0.60 * self.screen.window_width(), 0.60 * self.screen.window_height())
+
+        for segment in self.segments:
+            segment.setpos(graveyard)
+        self.segments.clear()
+        self.create_segment(STARTING_SEGMENTS)
+        self.head = self.segments[0]
+        self.head_shape = self.head.shape('triangle')
+
     def forward(self):
         """Moves the snake forward."""
         i = len(self.segments) - 1
