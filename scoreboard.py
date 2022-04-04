@@ -29,7 +29,7 @@ class Scoreboard(Turtle):
             self.high_score = self.score
             self._record_high_score()
         self.score = 0
-        self._show_score() ad
+        self._show_score()
 
     def increment_score(self):
         """Increments the score by 1."""
