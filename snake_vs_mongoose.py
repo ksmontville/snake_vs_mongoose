@@ -59,7 +59,10 @@ while game_on:
     if snake.detect_collision():
         if play_again():
             reset_game()
+            continue
         else:
+            reset_game()
+            game_on = False
             screen.bye()
             break
 
@@ -82,6 +85,9 @@ while game_on:
             if mongoose_segment.distance(snake_segment) < 15:
                 if play_again():
                     reset_game()
+                    continue
                 else:
+                    reset_game()
+                    game_on = False
                     screen.bye()
                     break

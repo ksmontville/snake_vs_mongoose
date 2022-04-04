@@ -1,5 +1,6 @@
 from turtle import Turtle
 
+FILENAME = r'c:\users\montv\python_work\100_days_of_code\snake_vs_mongoose\high_score'
 ALIGNMENT = 'center'
 FONT = ('Courier', 16, 'bold')
 
@@ -13,7 +14,7 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.screen = self.getscreen()
         self.goto(0, 0.44*self.screen.window_height())
-        self.high_score = 0
+        self.high_score = self._get_high_score()
         self.score = 0
         self._show_score()
 
@@ -26,13 +27,9 @@ class Scoreboard(Turtle):
         """"""
         if self.score > self.high_score:
             self.high_score = self.score
+            self._record_high_score()
         self.score = 0
-        self._show_score()
-
-    # def show_game_over(self):
-    #     """Display 'GAME OVER!' in the center of the screen."""
-    #     self.home()
-    #     self.write("GAME OVER!", align=ALIGNMENT, font=FONT)
+        self._show_score() ad
 
     def increment_score(self):
         """Increments the score by 1."""
@@ -46,3 +43,13 @@ class Scoreboard(Turtle):
         else:
             self.score = 0
         self._show_score()
+
+    def _record_high_score(self):
+        """Write the all-time high score to a file."""
+        with open(FILENAME, 'w') as f:
+            f.write(f"{self.score}")
+
+    def _get_high_score(self):
+        """Read the all-time high score from a file."""
+        with open(FILENAME) as f:
+            return int(f.read())
